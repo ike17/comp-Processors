@@ -1,0 +1,12 @@
+CHIP FOne {
+    IN A, B, C, D;
+    OUT F, G;
+
+    PARTS:
+    // F = A AND B AND C
+    And(a=A, b=B, out=aAndb);
+    And(a=aAndb, b=C, out=F);
+    
+    // G = B AND D
+    And(a=B, b=D, out=G);
+}

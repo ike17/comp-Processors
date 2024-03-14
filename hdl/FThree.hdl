@@ -1,0 +1,23 @@
+CHIP FThree {
+    IN A, B, C, D;
+    OUT E, F, G;
+
+    PARTS:
+    // Hypothetical minimization for E
+    And(a=B, b=D, out=BAndD);
+    Not(in=D, out=notD);
+    And(a=A, b=C, out=AAndC);
+    And(a=AAndC, b=notD, out=AAndCAndnotD);
+    Or(a=BAndD, b=AAndCAndnotD, out=E);
+
+    // Hypothetical minimization for F
+    Not(in=B, out=notB);
+    Not(in=D, out=notD);
+    And(a=notB, b=D, out=notBAndD);
+    And(a=C, b=notD, out=CAndnotD);
+    Or(a=A, b=notBAndD, out=AAndnotBAndD);
+    Or(a=AAndnotBAndD, b=CAndnotD, out=F);
+
+    // Hypothetical minimization for G
+    Xor(a=B, b=D, out=G);
+}

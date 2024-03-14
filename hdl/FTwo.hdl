@@ -1,0 +1,12 @@
+CHIP FTwo {
+    IN A, B, C, D;
+    OUT F, G;
+
+    PARTS:
+    // F = A + C
+    Or(a=A, b=C, out=F);
+    
+    
+    // G = B + D
+    Or(a=B, b=D, out=G);
+}

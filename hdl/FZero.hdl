@@ -1,0 +1,11 @@
+CHIP FZero {
+    IN A, B, C, D;
+    OUT F, G;
+
+    PARTS:
+    // F is NOT C
+    Not(in=C, out=F);
+
+    // G is NOT D
+    Not(in=D, out=G);
+}

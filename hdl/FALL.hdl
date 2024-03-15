@@ -1,0 +1,34 @@
+CHIP FALL {
+    IN f1, f0, A, B, C, D;
+    OUT E, F, G;
+
+    PARTS:
+    // Instantiate the functional units
+    FZero(A=A, B=B, C=C, D=D, F=F0, G=G0);
+    FOne(A=A, B=B, C=C, D=D, F=F1, G=G1);
+    FTwo(A=A, B=B, C=C, D=D, F=F2, G=G2);
+    FThree(A=A, B=B, C=C, D=D, E=E3, F=F3, G=G3);
+
+    // Control Logic for F and G using 2-way Muxes
+
+    // First stage Muxes for F output
+    Mux(a=F0, b=F1, sel=f0, out=MuxF01);
+    Mux(a=F2, b=F3, sel=f0, out=MuxF23);
+
+    // Second stage Mux for F output
+    Mux(a=MuxF01, b=MuxF23, sel=f1, out=F);
+
+    // First stage Muxes for G output
+    Mux(a=G0, b=G1, sel=f0, out=MuxG01);
+    Mux(a=G2, b=G3, sel=f0, out=MuxG23);
+
+    // Second stage Mux for G output
+    Mux(a=MuxG01, b=MuxG23, sel=f1, out=G);
+
+    // Handling E output, considering it is only from FThree
+
+    // Direct approach to select E3 when f1=0 and f0=0 (for FThree)
+    // Since E is only meaningful for FThree, use a combination of f1 and f0 to control it directly
+    And(a=not(f1), b=not(f0), out=selectE3); // Creates a signal that is true only for FThree's condition
+    Mux(a=false, b=E3, sel=selectE3, out=E); // Chooses E3 when FThree is selected, false otherwise
+}

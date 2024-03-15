@@ -1,0 +1,16 @@
+CHIP FSEQ {
+    IN Load, f1, f0, A, B;
+    OUT E, F, G;
+
+    PARTS:
+    // Instantiate the FALL chip
+    FALL(f1=f1, f0=f0, A=A, B=B, C=Ct, D=Dt, E=E, F=Ft, G=Gt);
+
+    // Multiplexers to select inputs Ct and Dt
+    Mux(a=Ft, b=A, sel=Load, out=Ct);
+    Mux(a=Gt, b=B, sel=Load, out=Dt);
+
+    // DFFs to store previous outputs Ft and Gt
+    DFF(in=Ft, out=F, out=prevF);
+    DFF(in=Gt, out=G, out=prevG);
+}

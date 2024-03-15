@@ -1,3 +1,9 @@
+/**
+    Boolean Expressions
+    F = Not C
+    G = Not D
+*/
+
 CHIP FZero {
     IN A, B, C, D;
     OUT F, G;

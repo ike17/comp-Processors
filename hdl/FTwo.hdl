@@ -1,12 +1,18 @@
+/**
+    Boolean Expressions
+    F = A Or C
+    G = B Or D
+*/
+
 CHIP FTwo {
     IN A, B, C, D;
     OUT F, G;
 
     PARTS:
-    // F = A + C
+    // F = A Or C
     Or(a=A, b=C, out=F);
     
     
-    // G = B + D
+    // G = B Or D
     Or(a=B, b=D, out=G);
 }
